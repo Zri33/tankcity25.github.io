@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tankcity'25</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+
+    /* Tekstur kertas washi hitam halus — seperti kertas tradisional Jepang */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200"><rect width="100%" height="100%" fill="%23000"/><path d="M0,100 Q100,90 200,100 T400,100 M0,200 Q100,190 200,200 T400,200 M0,300 Q100,290 200,300 T400,300 M600,150 Q700,140 800,150 T1000,150 M600,250 Q700,240 800,250 T1000,250 M600,350 Q700,340 800,350 T1000,350 M1200,100 Q1100,90 1000,100 T800,100 M1200,200 Q1100,190 1000,200 T800,200 M1200,300 Q1100,290 1000,300 T800,300" stroke="%23111" stroke-width="0.15" fill="none"/></svg>');
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    /* Cahaya remang dari atas — seperti lampu obor tradisional yang menyinari kaligrafi */
+    body::after {
+      content: '';
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 800px;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+      z-index: -1;
+      border-radius: 50%;
+    }
+    }
+
+    /* Efek tinta basah yang menyebar — seperti kuas yang baru diangkat dari tinta */
+    .brush-calligraphy::before {
+      content: '戦車の街';
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #FFE4C4;
+      font-size: 9rem;
+      font-family: 'Noto Sans JP', 'Hiragino Mincho Pro', serif;
+      text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.15);
+      -webkit-text-stroke: 0.3px rgba(0, 0, 0, 0.1);
+      text-stroke: 0.3px rgba(0, 0, 0, 0.1);
+      opacity: 0.5;
+      z-index: -1;
+      animation: inkFlow 8s ease-in-out infinite;
+    }
+
+    /* Animasi: kaligrafi bernapas seperti kuas yang diangkat perlahan */
+    @keyframes brushBreathe {
+      0%, 100% {
+        transform: translateY(0) rotate(-0.1deg);
+      }
+      50% {
+        transform: translateY(-1px) rotate(0.1deg);
+      }
+    }
+
+    /* Animasi: efek tinta yang menyebar seperti tetesan basah */
+    @keyframes inkFlow {
+      0%, 100% {
+        opacity: 0.5;
+        filter: blur(1px);
+      }
+      50% {
+        opacity: 0.7;
+        filter: blur(3px);
+      }
+    }
+
+    /* Teks pendukung: puisi filosofis */
+    .poem {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #A52A2A;
+      stroke:     #FFE4C4;
+      font-size: 1.2rem;
+      font-style: italic;
+      font-family: 'Georgia', serif;
+      opacity: 0.7;
+      letter-spacing: 0.3em;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+    }
+
+    /* Partikel debu tinta yang mengambang di udara */
+    .dust {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: dustFall linear infinite;
+    }
+
+    @keyframes dustFall {
+      to {
+        transform: translateY(100vh) translateX(10px);
+        opacity: 0;
+      }
+    }
+
+    /* Efek "goresan kuas" di latar belakang — garis samar seperti sisa gerakan kuas */
+    .brush-stroke {
+      position: absolute;
+      width: 200px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      transform-origin: left center;
+      pointer-events: none;
+      animation: brushSwipe linear infinite;
+    }
+
+    @keyframes brushSwipe {
+      0% {
+        left: -100px;
+        opacity: 0;
+        transform: rotate(-15deg);
+      }
+      25% {
+        opacity: 0.3;
+      }
+      75% {
+        opacity: 0.1;
+      }
+      100% {
+        left: 110vw;
+        opacity: 0;
+        transform: rotate(15deg);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .brush-calligraphy {
+        font-size: 6rem;
+        letter-spacing: -3px;
+        color: #FFEBCD;
+        stroke :     #A52A2A;
+      }
+      .poem {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brush-calligraphy {
+        font-size: 4.5rem;
+        letter-spacing: -2px;
+      }
+      .poem {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Kaligrafi utama: gaya brush kuas tradisional -->
+  <div class="brush-calligraphy">戦車の街</div>
+
+  <!-- Puisi pendukung: nuansa Zen dan militer -->
+  <div class="poem">TANK CITY'25</div>
+
+  <!-- Partikel debu tinta -->
+  <script>
+    const body = document.body;
+    
+    // Partikel debu tinta
+    for (let i = 0; i < 40; i++) {
+      const dust = document.createElement('div');
+      dust.className = 'dust';
+      dust.style.left = `${Math.random() * 100}%`;
+      dust.style.animationDuration = `${5 + Math.random() * 7}s`;
+      dust.style.animationDelay = `${Math.random() * 3}s`;
+      dust.style.opacity = `${0.1 + Math.random() * 0.4}`;
+      body.appendChild(dust);
+    }
+
+    // Goresan kuas samar di latar belakang
+    for (let i = 0; i < 6; i++) {
+      const stroke = document.createElement('div');
+      stroke.className = 'brush-stroke';
+      stroke.style.top = `${20 + i * 15}%`;
+      stroke.style.animationDuration = `${8 + Math.random() * 6}s`;
+      stroke.style.animationDelay = `${Math.random() * 4}s`;
+      body.appendChild(stroke);
+    }
+  </script>
+</body>
+</html>
